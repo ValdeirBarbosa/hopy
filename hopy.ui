@@ -188,16 +188,30 @@ padding:10px;
       <height>23</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">text-align:center;
 font-size:14px;
-color:blue;</string>
+color:blue;
+font-weight:bold;
+</string>
     </property>
     <property name="value">
-     <number>24</number>
+     <number>54</number>
     </property>
     <property name="textVisible">
      <bool>true</bool>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+    <property name="format">
+     <string>%p%</string>
     </property>
    </widget>
    <widget class="QPushButton" name="start_btn">
@@ -281,6 +295,9 @@ borde-radius:2px;</string>
     <property name="frameShadow">
      <enum>QFrame::Sunken</enum>
     </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <item>
      <property name="text">
       <string>XLSX files 01</string>
@@ -362,7 +379,7 @@ borde-radius:2px;</string>
       <x>430</x>
       <y>260</y>
       <width>131</width>
-      <height>22</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -371,7 +388,11 @@ background-color:#fff;
 color:blue;
 font-size:14px;
 border:1px solid blue;
+padding-left:13px;
 </string>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QComboBox::AdjustToMinimumContentsLength</enum>
     </property>
     <item>
      <property name="text">
