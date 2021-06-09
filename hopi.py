@@ -9,13 +9,21 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog, QPlainTextEdit
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        # Dialog.resize(False,False)
+        
         self.xlx_file = ""
         self.afd_file = ""
         self.progressBar = QtWidgets.QProgressBar(Dialog)
@@ -50,7 +58,7 @@ class Ui_Dialog(object):
         self.AFD_Select_button.clicked.connect(self._afdFileSelect) #chamada de função <==>
         self.cancel_button.clicked.connect(self.cancel) 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("hopy/images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.AFD_Select_button.setIcon(icon)
         self.AFD_Select_button.setIconSize(QtCore.QSize(36, 36))
         self.AFD_Select_button.setObjectName("AFD_Select_button")
@@ -60,7 +68,7 @@ class Ui_Dialog(object):
         self.xlx_select_button.setStyleSheet("border:none;border:1px solir green;border-radius:4px;")
         self.xlx_select_button.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("hopy/images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.xlx_select_button.setIcon(icon1)
         self.xlx_select_button.setIconSize(QtCore.QSize(36, 36))
         self.xlx_select_button.setObjectName("xlx_select_files")
@@ -139,6 +147,7 @@ class Ui_Dialog(object):
         self.line_12.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_12.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_12.setObjectName("line_12")
+
         self.verticalScrollBar = QtWidgets.QScrollBar(self.frame)
         self.verticalScrollBar.setGeometry(QtCore.QRect(528, 105, 20, 31))
         self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
@@ -148,6 +157,9 @@ class Ui_Dialog(object):
         self.line_11.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_11.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_11.setObjectName("line_11")
+
+ 
+
         self.line_13 = QtWidgets.QFrame(Dialog)
         self.line_13.setGeometry(QtCore.QRect(40, 293, 571, 16))
         self.line_13.setFrameShape(QtWidgets.QFrame.HLine)
@@ -167,6 +179,8 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -202,6 +216,9 @@ class Ui_Dialog(object):
 
     def cancel(self):
         sys.exit(app.exec_())
+
+
+
      
 if __name__ == "__main__":
     import sys
