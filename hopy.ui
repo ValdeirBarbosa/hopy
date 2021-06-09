@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>695</width>
-    <height>364</height>
+    <width>694</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>0</y>
      <width>681</width>
-     <height>361</height>
+     <height>451</height>
     </rect>
    </property>
    <property name="mouseTracking">
@@ -90,7 +90,7 @@ text-align:center;
    <widget class="QLabel" name="afd_lbl">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>118</x>
       <y>87</y>
       <width>521</width>
       <height>41</height>
@@ -99,7 +99,7 @@ text-align:center;
     <property name="styleSheet">
      <string notr="true">background-color:#fff;
 color:blue;
-font-size:10px;
+font-size:12px;
 text-align:center;
 border:1px solid blue;
 borde-radius:2px;</string>
@@ -118,7 +118,7 @@ borde-radius:2px;</string>
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>150</y>
+      <y>172</y>
       <width>41</width>
       <height>51</height>
      </rect>
@@ -150,7 +150,7 @@ borde-radius:2px;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>230</y>
+      <y>290</y>
       <width>611</width>
       <height>16</height>
      </rect>
@@ -163,7 +163,7 @@ borde-radius:2px;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>300</y>
+      <y>350</y>
       <width>431</width>
       <height>51</height>
      </rect>
@@ -183,7 +183,7 @@ padding:10px;
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>270</y>
+      <y>320</y>
       <width>631</width>
       <height>23</height>
      </rect>
@@ -204,7 +204,7 @@ color:blue;</string>
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>310</y>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -226,7 +226,7 @@ text-align:center</string>
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>310</y>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -248,7 +248,7 @@ text-align:center</string>
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>300</y>
+      <y>350</y>
       <width>16</width>
       <height>41</height>
      </rect>
@@ -260,14 +260,20 @@ text-align:center</string>
    <widget class="QListWidget" name="xlsx_listWidget">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>117</x>
       <y>150</y>
       <width>521</width>
-      <height>51</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">text-align:center;</string>
+     <string notr="true">text-align:center;
+background-color:#fff;
+color:blue;
+font-size:10px;
+text-align:center;
+border:1px solid blue;
+borde-radius:2px;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -277,24 +283,176 @@ text-align:center</string>
     </property>
     <item>
      <property name="text">
-      <string>XLSX files </string>
+      <string>XLSX files 01</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="background">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>New Item</string>
+      <string>XLSX files 02</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>New Item</string>
+      <string>XLSX files 03</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>New Item</string>
+      <string>XLSX files 04</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>XLSX files 05</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>260</y>
+      <width>131</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align:center;
+background-color:#fff;
+color:blue;
+font-size:14px;
+border:1px solid blue;
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Janeiro</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fevereiro</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Março</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abril</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Maio</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Junho</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Julho</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Agosto</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Setembro</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Outubro</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Novembro</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string notr="true">Dezembro</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>254</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size:14px;
+font-weight:bold;
+color:rgb(0, 0, 127);
+text-align:center;
+</string>
+    </property>
+    <property name="text">
+     <string>Selecione o mês de referencia:</string>
+    </property>
    </widget>
    <zorder>progressBar</zorder>
    <zorder>Tlbl_titulo</zorder>
@@ -307,6 +465,8 @@ text-align:center</string>
    <zorder>cancel_btn</zorder>
    <zorder>line_2</zorder>
    <zorder>xlsx_listWidget</zorder>
+   <zorder>comboBox</zorder>
+   <zorder>label</zorder>
   </widget>
  </widget>
  <resources/>
