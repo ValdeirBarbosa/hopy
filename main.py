@@ -240,6 +240,11 @@ class Ui_Form(object):
         final_line = len(text)-1
         print(text[final_line])
 
+        print(self.comboBox.itemText()) 
+        print(self.comboBox.itemData())
+
+    
+      
     def _xlsFileSelect(self):
         xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
         xlx_file_list = xlx_file[0]
@@ -248,6 +253,8 @@ class Ui_Form(object):
         #     xls_files+=xlx+'\n'
         # # self.lbl_xlx_slected_file.setText("{}".format(xls_files))
         # print(xls_files)
+    
+   
         
         _translate = QtCore.QCoreApplication.translate
         __sortingEnabled = self.xlsx_listWidget.isSortingEnabled()
@@ -258,7 +265,7 @@ class Ui_Form(object):
                 list_tem  = xlx_file_list[x].split("/")
                 item.setText(_translate("Form",list_tem[len(list_tem)-1]))
         self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
-    
+        
    
 
         
