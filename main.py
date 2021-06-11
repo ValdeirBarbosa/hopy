@@ -9,6 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
 
 
 class Ui_Form(object):
@@ -42,6 +49,7 @@ class Ui_Form(object):
         self.afd_btn.setIcon(icon)
         self.afd_btn.setIconSize(QtCore.QSize(45, 45))
         self.afd_btn.setFlat(False)
+        self.afd_btn.clicked.connect(self._afdFileSelect)
         self.afd_btn.setObjectName("afd_btn")
         self.afd_lbl = QtWidgets.QLabel(self.principal_frame)
         self.afd_lbl.setGeometry(QtCore.QRect(118, 87, 521, 41))
@@ -66,6 +74,7 @@ class Ui_Form(object):
         self.xlsx_btn.setDefault(True)
         self.xlsx_btn.setFlat(False)
         self.xlsx_btn.setObjectName("xlsx_btn")
+        self.xlsx_btn.clicked.connect(self._xlsFileSelect) #chamada de função <==>
 
         self.line_hr = QtWidgets.QFrame(self.principal_frame)
         self.line_hr.setGeometry(QtCore.QRect(30, 290, 611, 16))
@@ -128,8 +137,9 @@ class Ui_Form(object):
         self.xlsx_listWidget.setGeometry(QtCore.QRect(117, 150, 521, 91))
         self.xlsx_listWidget.setStyleSheet("text-align:center;\n"
 "background-color:#fff;\n"
+"padding-left:10px;\n"
 "color:blue;\n"
-"font-size:10px;\n"
+"font-size:12px;\n"
 "text-align:center;\n"
 "border:1px solid blue;\n"
 "borde-radius:2px;")
@@ -145,8 +155,7 @@ class Ui_Form(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.NoBrush)
         item.setBackground(brush)
-        item1 = item
-        self.xlsx_listWidget.addItem(item)
+      
         self.comboBox = QtWidgets.QComboBox(self.principal_frame)
         self.comboBox.setGeometry(QtCore.QRect(430, 260, 131, 21))
         self.comboBox.setStyleSheet("text-align:center;\n"
@@ -200,17 +209,13 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.Tlbl_titulo.setText(_translate("Form", "Home Office auxiliar de ajuste de marcação  ®"))
-        self.afd_lbl.setText(_translate("Form", "Select AFD file "))
-        self.alerta_lbl.setText(_translate("Form", "Please wait until the bar complete 100%"))
+        self.afd_lbl.setText(_translate("Form", "Selecione o arquivo no formato AFD  "))
+        self.alerta_lbl.setText(_translate("Form", "Por favor aguarde a barra de progresso atingir 100%"))
         self.progressBar.setFormat(_translate("Form", "%p%"))
         self.start_btn.setText(_translate("Form", "START"))
         self.cancel_btn.setText(_translate("Form", "CANCEL"))
 
-        __sortingEnabled = self.xlsx_listWidget.isSortingEnabled()
-        self.xlsx_listWidget.setSortingEnabled(False)
-        item = self.xlsx_listWidget.item(0)
-        item.setText(_translate("Form", "XLSX files 01"))
-        self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
+       
 
         
         self.comboBox.setItemText(0, _translate("Form", "Janeiro"))
@@ -226,6 +231,37 @@ class Ui_Form(object):
         self.comboBox.setItemText(10, _translate("Form","Novembro"))
         self.label.setText(_translate("Form", "Selecione o mês de referencia:"))
 
+    def _afdFileSelect(self):
+        self.afd_file = QFileDialog.getOpenFileName(self.afd_btn,filter="txt Files (*.txt)")
+        print(self.afd_file[0])
+        self.afd_lbl.setText(self.afd_file[0])
+        
+        text=open(self.afd_file[0]).readlines()
+        final_line = len(text)-1
+        print(text[final_line])
+
+    def _xlsFileSelect(self):
+        xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
+        xlx_file_list = xlx_file[0]
+        xls_files =""
+        # for xlx in xlx_file_list:
+        #     xls_files+=xlx+'\n'
+        # # self.lbl_xlx_slected_file.setText("{}".format(xls_files))
+        # print(xls_files)
+        
+        _translate = QtCore.QCoreApplication.translate
+        __sortingEnabled = self.xlsx_listWidget.isSortingEnabled()
+        for x in range(len(xlx_file_list)):
+                item = QtWidgets.QListWidgetItem()
+                self.xlsx_listWidget.addItem(item)
+                item = self.xlsx_listWidget.item(x)
+                list_tem  = xlx_file_list[x].split("/")
+                item.setText(_translate("Form",list_tem[len(list_tem)-1]))
+        self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
+    
+   
+
+        
 
 if __name__ == "__main__":
     import sys
