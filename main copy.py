@@ -14,9 +14,6 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from pandas import ExcelWriter
-from pandas import ExcelFile
-import pandas as pd
 import sys
 
 
@@ -42,6 +39,7 @@ class Ui_Form(object):
 "\n"
 "")
         self.Tlbl_titulo.setObjectName("Tlbl_titulo")
+
         self.afd_btn = QtWidgets.QPushButton(self.principal_frame)
         self.afd_btn.setGeometry(QtCore.QRect(40, 80, 41, 51))
         self.afd_btn.setStyleSheet("border:none")
@@ -241,10 +239,7 @@ class Ui_Form(object):
         final_line = len(text)-1
         print(text[final_line])
         
-    def _readExcelFiles(self,xlsxList):
-            df = pd.read_excel(xlsxList,sheet_name = self.comboBox.currentText(),skiprows = range(0, 11))
-            print("Column headings:")
-            print(df.columns.values)
+    
       
     def _xlsFileSelect(self):
         xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
@@ -260,9 +255,7 @@ class Ui_Form(object):
                 item.setText(_translate("Form",list_tem[len(list_tem)-1]))
                 print(xlx_file_list[x])
         self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
-        self._readExcelFiles(xlx_file_list[0])
-                       
-
+        
     def _cancel(self):
         sys.exit(app.exec_())
 
@@ -271,9 +264,6 @@ class Ui_Form(object):
             print(self.comboBox.currentText(), self.comboBox.currentIndex())
             for x in range(101):
                 self.progressBar.setProperty("value", x)
-         
-            
-
                
 
 
