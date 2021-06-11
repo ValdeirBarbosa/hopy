@@ -35,7 +35,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
-        for x in range(100):
+        for x in range(1000):
             item = QtWidgets.QListWidgetItem()
             self.listWidget.addItem(item)
             item = self.listWidget.item(x)

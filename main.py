@@ -45,7 +45,7 @@ class Ui_Form(object):
         self.afd_btn.setStyleSheet("border:none")
         self.afd_btn.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("hopy/images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.afd_btn.setIcon(icon)
         self.afd_btn.setIconSize(QtCore.QSize(45, 45))
         self.afd_btn.setFlat(False)
@@ -68,7 +68,7 @@ class Ui_Form(object):
         self.xlsx_btn.setStyleSheet("border:none")
         self.xlsx_btn.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("hopy/images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.xlsx_btn.setIcon(icon1)
         self.xlsx_btn.setIconSize(QtCore.QSize(45, 45))
         self.xlsx_btn.setDefault(True)
@@ -99,7 +99,7 @@ class Ui_Form(object):
 "color:blue;\n"
 "font-weight:bold;\n"
 "")
-        self.progressBar.setProperty("value", 54)
+        self.progressBar.setProperty("value", 0)
         self.progressBar.setTextVisible(True)
         self.progressBar.setOrientation(QtCore.Qt.Horizontal)
         self.progressBar.setInvertedAppearance(False)
@@ -115,6 +115,7 @@ class Ui_Form(object):
 "font-size:12px;\n"
 "text-align:center")
         self.start_btn.setObjectName("start_btn")
+        self.start_btn.clicked.connect(self._start)
         self.cancel_btn = QtWidgets.QPushButton(self.principal_frame)
         self.cancel_btn.setGeometry(QtCore.QRect(580, 360, 75, 23))
         self.cancel_btn.setStyleSheet("border-radius:4px;\n"
@@ -126,6 +127,7 @@ class Ui_Form(object):
 "text-align:center")
 
         self.cancel_btn.setObjectName("cancel_btn")
+        self.cancel_btn.clicked.connect(self._cancel)
 
         self.line_2 = QtWidgets.QFrame(self.principal_frame)
         self.line_2.setGeometry(QtCore.QRect(560, 350, 16, 41))
@@ -155,15 +157,13 @@ class Ui_Form(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.NoBrush)
         item.setBackground(brush)
-      
         self.comboBox = QtWidgets.QComboBox(self.principal_frame)
-        self.comboBox.setGeometry(QtCore.QRect(430, 260, 131, 21))
+        self.comboBox.setGeometry(QtCore.QRect(430, 260, 101, 21))
         self.comboBox.setStyleSheet("text-align:center;\n"
 "background-color:#fff;\n"
 "color:blue;\n"
 "font-size:14px;\n"
-"border:1px solid blue;\n"
-"padding-left:13px;\n"
+"border:1px solid;\n"
 "")
         self.comboBox.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
         self.comboBox.setObjectName("comboBox")
@@ -180,11 +180,12 @@ class Ui_Form(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.setItemText(11, "Dezembro")
+       
         self.label = QtWidgets.QLabel(self.principal_frame)
         self.label.setGeometry(QtCore.QRect(190, 254, 201, 31))
         self.label.setStyleSheet("font-size:14px;\n"
 "font-weight:bold;\n"
-"color:rgb(0, 0, 127);\n"
+"color:rgb(0, 0, 0);\n"
 "text-align:center;\n"
 "")
         self.label.setObjectName("label")
@@ -212,12 +213,10 @@ class Ui_Form(object):
         self.afd_lbl.setText(_translate("Form", "Selecione o arquivo no formato AFD  "))
         self.alerta_lbl.setText(_translate("Form", "Por favor aguarde a barra de progresso atingir 100%"))
         self.progressBar.setFormat(_translate("Form", "%p%"))
-        self.start_btn.setText(_translate("Form", "START"))
-        self.cancel_btn.setText(_translate("Form", "CANCEL"))
+        self.start_btn.setText(_translate("Form", "INICIAR"))
+        self.cancel_btn.setText(_translate("Form", "SAIR"))
 
        
-
-        
         self.comboBox.setItemText(0, _translate("Form", "Janeiro"))
         self.comboBox.setItemText(1, _translate("Form", "Fevereiro"))
         self.comboBox.setItemText(2, _translate("Form", "Março"))
@@ -239,22 +238,12 @@ class Ui_Form(object):
         text=open(self.afd_file[0]).readlines()
         final_line = len(text)-1
         print(text[final_line])
-
-        print(self.comboBox.itemText()) 
-        print(self.comboBox.itemData())
-
+        
     
       
     def _xlsFileSelect(self):
         xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
-        xlx_file_list = xlx_file[0]
-        xls_files =""
-        # for xlx in xlx_file_list:
-        #     xls_files+=xlx+'\n'
-        # # self.lbl_xlx_slected_file.setText("{}".format(xls_files))
-        # print(xls_files)
-    
-   
+        xlx_file_list = xlx_file[0]  
         
         _translate = QtCore.QCoreApplication.translate
         __sortingEnabled = self.xlsx_listWidget.isSortingEnabled()
@@ -264,9 +253,19 @@ class Ui_Form(object):
                 item = self.xlsx_listWidget.item(x)
                 list_tem  = xlx_file_list[x].split("/")
                 item.setText(_translate("Form",list_tem[len(list_tem)-1]))
+                print(xlx_file_list[x])
         self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
         
-   
+    def _cancel(self):
+        sys.exit(app.exec_())
+
+    def _start(self):
+            #fazer a barra encher 
+            print(self.comboBox.currentText(), self.comboBox.currentIndex())
+            for x in range(101):
+                self.progressBar.setProperty("value", x)
+               
+
 
         
 
