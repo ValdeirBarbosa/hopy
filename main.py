@@ -47,7 +47,7 @@ class Ui_Form(object):
         self.afd_btn.setStyleSheet("border:none")
         self.afd_btn.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("hopy/images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/file.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.afd_btn.setIcon(icon)
         self.afd_btn.setIconSize(QtCore.QSize(45, 45))
         self.afd_btn.setFlat(False)
@@ -70,7 +70,7 @@ class Ui_Form(object):
         self.xlsx_btn.setStyleSheet("border:none")
         self.xlsx_btn.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("hopy/images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("images/xls.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.xlsx_btn.setIcon(icon1)
         self.xlsx_btn.setIconSize(QtCore.QSize(45, 45))
         self.xlsx_btn.setDefault(True)
@@ -242,10 +242,10 @@ class Ui_Form(object):
         print(text[final_line])
         
     def _readExcelFiles(self,xlsxList):
-            df = pd.read_excel(xlsxList,sheet_name = self.comboBox.currentText(),skiprows = range(0, 11))
-            print("Column headings:")
-            print(df.columns.values)
-      
+            df = pd.read_excel(xlsxList,sheet_name = self.comboBox.currentText())#,skiprows = range(0, 11)
+            #df = pd.read_excel(open(xlsxList,'r'))
+            #df = df.fillna(0)
+            print(df.fillna(0))
     def _xlsFileSelect(self):
         xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
         xlx_file_list = xlx_file[0]  
@@ -287,3 +287,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+
