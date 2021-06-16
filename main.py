@@ -22,7 +22,6 @@ import pandas as pd
 import sys
 
 
-
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -44,6 +43,7 @@ class Ui_Form(object):
 "\n"
 "")
         self.Tlbl_titulo.setObjectName("Tlbl_titulo")
+
         self.afd_btn = QtWidgets.QPushButton(self.principal_frame)
         self.afd_btn.setGeometry(QtCore.QRect(40, 80, 41, 51))
         self.afd_btn.setStyleSheet("border:none")
@@ -209,7 +209,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-
+        self.xlx_file_list = None
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -243,32 +243,14 @@ class Ui_Form(object):
         final_line = len(text)-1
         print(text[final_line])
         
-    def _readExcelFiles(self,xlsxList):
-            df = pd.read_excel(xlsxList,sheet_name = self.comboBox.currentText(),skiprows = range(0, 10))
-            df = df.fillna(datetime.time(0,0,0))
-           
-           
-            for index, row in df.iterrows():
-                #     print(row)
-                    hentrada = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ENTRADA'].hour,row['ENTRADA'].minute,row['ENTRADA'].second)
-                    hsaida   = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['SAIDA'].hour,row['SAIDA'].minute,row['SAIDA'].second)
-                    almSaida = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ALMOCO-SAIDA'].hour,row['ALMOCO-SAIDA'].minute,row['ALMOCO-SAIDA'].second)
-                    almEntra = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ALMOCO-ENTRADA'].hour,row['ALMOCO-ENTRADA'].minute,row['ALMOCO-ENTRADA'].second)
-                    print(hsaida-hentrada-(almEntra-almSaida))
-                    print()
-
-           
-            
-
-
+    
+      
     def _xlsFileSelect(self):
         xlx_file = QFileDialog.getOpenFileNames( self.xlsx_btn,filter="Excel Files (*.xlsx)")
         xlx_file_list = xlx_file[0]  
-       
-        
+        self.xlx_file_list = xlx_file_list
         _translate = QtCore.QCoreApplication.translate
         __sortingEnabled = self.xlsx_listWidget.isSortingEnabled()
-
         for x in range(len(xlx_file_list)):
                 item = QtWidgets.QListWidgetItem()
                 self.xlsx_listWidget.addItem(item)
@@ -277,8 +259,23 @@ class Ui_Form(object):
                 item.setText(_translate("Form",list_tem[len(list_tem)-1]))
                 print(xlx_file_list[x])
         self.xlsx_listWidget.setSortingEnabled(__sortingEnabled)
-        self._readExcelFiles(xlx_file_list[0])
-                       
+
+           
+    def _readExcelFiles(self,xlx_file_list):
+            df = pd.read_excel(xlx_file_list[0] ,sheet_name = self.comboBox.currentText(),skiprows = range(0, 10))
+            df = df.fillna(datetime.time(0,0,0))
+           
+           
+            for index, row in df.iterrows():
+                    
+                    hentrada = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ENTRADA'].hour,row['ENTRADA'].minute,row['ENTRADA'].second)
+                    hsaida   = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['SAIDA'].hour,row['SAIDA'].minute,row['SAIDA'].second)
+                    almSaida = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ALMOCO-SAIDA'].hour,row['ALMOCO-SAIDA'].minute,row['ALMOCO-SAIDA'].second)
+                    almEntra = datetime.datetime(row['DATA'].year,row['DATA'].month,row['DATA'].day,row['ALMOCO-ENTRADA'].hour,row['ALMOCO-ENTRADA'].minute,row['ALMOCO-ENTRADA'].second)
+                    horasDia = (hsaida-hentrada-(almEntra-almSaida))
+                    print('{} - {} - {} - {} - {}'.format(hentrada.time(),hsaida.time(),almSaida.time(),almEntra.time(),horasDia))
+      
+
 
     def _cancel(self):
         sys.exit(app.exec_())
@@ -288,10 +285,8 @@ class Ui_Form(object):
             print(self.comboBox.currentText(), self.comboBox.currentIndex())
             for x in range(101):
                 self.progressBar.setProperty("value", x)
-         
-            
-
-               
+            print(self.xlx_file_list)
+            self._readExcelFiles(self.xlx_file_list)
 
 
         
@@ -304,4 +299,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-
