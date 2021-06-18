@@ -61,8 +61,7 @@ class Ui_Form(object):
 "color:blue;\n"
 "font-size:12px;\n"
 "text-align:center;\n"
-"border:1px solid blue;\n"
-"borde-radius:2px;")
+"border:1px solid blue;\n")
 
         self.afd_lbl.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.afd_lbl.setAlignment(QtCore.Qt.AlignCenter)
@@ -147,8 +146,7 @@ class Ui_Form(object):
 "color:blue;\n"
 "font-size:12px;\n"
 "text-align:center;\n"
-"border:1px solid blue;\n"
-"borde-radius:2px;")
+"border:1px solid blue;\n")
 
         self.xlsx_listWidget.setFrameShape(QtWidgets.QFrame.Box)
         self.xlsx_listWidget.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -247,12 +245,15 @@ class Ui_Form(object):
         
     def _readExcelFiles(self,xlx_file_list):
         df = pd.read_excel(xlx_file_list ,sheet_name = self.comboBox.currentText(),skiprows = range(0, 10),usecols='A:E')
+        df = df[:31] # limitando  as linhas do dataframe
         df = df.fillna(datetime.time(0, 0))
         
         lista = df.values.tolist()
         for line in lista:
                 if(line[0].day <= 31):
-                        print('dia{} entrada{} saida Almoço{} volta Almoço{} saida{}-diaTeste'.format(line[0],line[1],line[2],line[3],line[0].day))
+                        linhaText = '{}={}{}{}'.format(line[0].strftime('%d%m%Y'),line[1],line[2],line[3])
+                        linhaText = linhaText.replace('-','')#.replace(":","")
+                        print(linhaText)
                 else:
                         break
       
